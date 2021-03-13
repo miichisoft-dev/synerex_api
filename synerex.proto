@@ -30,6 +30,8 @@ service Synerex {
     rpc CloseDemandChannel(Channel) returns (Response){} // close demand channel
     rpc CloseSupplyChannel(Channel) returns (Response){} // close supply channel
     rpc CloseAllChannels(ProviderID) returns (Response){} // close all channels from Provider
+
+    rpc GetAccessToken(OAuthRequest) returns (OAuthResponse){}
 }
 
 message Response {
@@ -167,4 +169,15 @@ message GatewayMsg{  // how to prevent loop!
 message ProviderID {
     fixed64 client_id = 1;
     string arg_json = 3;  // for Any Argument
+}
+
+message OAuthRequest {
+    string node_id = 1;
+    string time = 2;
+    string public_key = 3;
+    string token = 4;
+}
+
+message OAuthResponse {
+    string access_token = 1;
 }
